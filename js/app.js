@@ -51,20 +51,27 @@ function activateSidebar() {
         .then(html => {
           document.getElementById("main").innerHTML = html;
 
-          // Execute scripts from the loaded page
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, 'text/html');
-          const scripts = htmlDoc.querySelectorAll('script');
+          // Execute scripts from the loaded page with a slight delay
+          setTimeout(() => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, 'text/html');
+            const scripts = htmlDoc.querySelectorAll('script');
 
-          scripts.forEach(script => {
-            const newScript = document.createElement('script');
-            if (script.src) {
-              newScript.src = script.src;
-            } else {
-              newScript.textContent = script.textContent;
+            scripts.forEach(script => {
+              const newScript = document.createElement('script');
+              if (script.src) {
+                newScript.src = script.src;
+              } else {
+                newScript.textContent = script.textContent;
+              }
+              document.body.appendChild(newScript);
+            });
+
+            // Call init functions for specific pages
+            if (page === "dashboard.html" && typeof initDashboard === 'function') {
+              initDashboard();
             }
-            document.body.appendChild(newScript);
-          });
+          }, 50);
         });
     });
   });
@@ -77,20 +84,27 @@ function activateSidebar() {
     .then(html => {
       document.getElementById("main").innerHTML = html;
 
-      // Execute scripts from the loaded page
-      const parser = new DOMParser();
-      const htmlDoc = parser.parseFromString(html, 'text/html');
-      const scripts = htmlDoc.querySelectorAll('script');
+      // Execute scripts from the loaded page with a slight delay
+      setTimeout(() => {
+        const parser = new DOMParser();
+        const htmlDoc = parser.parseFromString(html, 'text/html');
+        const scripts = htmlDoc.querySelectorAll('script');
 
-      scripts.forEach(script => {
-        const newScript = document.createElement('script');
-        if (script.src) {
-          newScript.src = script.src;
-        } else {
-          newScript.textContent = script.textContent;
+        scripts.forEach(script => {
+          const newScript = document.createElement('script');
+          if (script.src) {
+            newScript.src = script.src;
+          } else {
+            newScript.textContent = script.textContent;
+          }
+          document.body.appendChild(newScript);
+        });
+
+        // Call init functions for specific pages
+        if (defaultPage === "dashboard.html" && typeof initDashboard === 'function') {
+          initDashboard();
         }
-        document.body.appendChild(newScript);
-      });
+      }, 50);
     });
 }
 
