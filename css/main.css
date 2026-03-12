@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+#identity{
+    font-size: 1.5rem;
+    font-weight: 550;
+}
+
+#info {
+  width: 9%;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+
+  #calendar {
+    height: 1.1em;
+    width: 1.1em;
+  }
+
+  #Date {
+    font-size: .9rem;
+    font-weight: 550;
+  }
+}
