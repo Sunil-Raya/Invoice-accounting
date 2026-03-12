@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/layout.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Ledger</title>
   </head>
   <body>
@@ -18,13 +19,11 @@
 
     <script src="js/app.js"></script>
     <script>
-      // Load navbar component
       fetch("components/navbar.html")
         .then((res) => res.text())
         .then((data) => {
           document.getElementById("nav").innerHTML = data;
 
-          // Now the element exists, we can set the date
           const today = new Date();
           const year = today.getFullYear();
           const month = String(today.getMonth() + 1).padStart(2, "0");

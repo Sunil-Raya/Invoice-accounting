@@ -4,6 +4,21 @@ function loadComponent(id, file) {
     .then(data => {
       document.getElementById(id).innerHTML = data;
 
+      // Execute scripts from the fetched HTML
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(data, 'text/html');
+      const scripts = htmlDoc.querySelectorAll('script');
+
+      scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        if (script.src) {
+          newScript.src = script.src;
+        } else {
+          newScript.textContent = script.textContent;
+        }
+        document.body.appendChild(newScript);
+      });
+
       if (id === "sidebar") {
         activateSidebar();
       }
@@ -35,6 +50,21 @@ function activateSidebar() {
         .then(res => res.text())
         .then(html => {
           document.getElementById("main").innerHTML = html;
+
+          // Execute scripts from the loaded page
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, 'text/html');
+          const scripts = htmlDoc.querySelectorAll('script');
+
+          scripts.forEach(script => {
+            const newScript = document.createElement('script');
+            if (script.src) {
+              newScript.src = script.src;
+            } else {
+              newScript.textContent = script.textContent;
+            }
+            document.body.appendChild(newScript);
+          });
         });
     });
   });
@@ -46,5 +76,21 @@ function activateSidebar() {
     .then(res => res.text())
     .then(html => {
       document.getElementById("main").innerHTML = html;
+
+      // Execute scripts from the loaded page
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(html, 'text/html');
+      const scripts = htmlDoc.querySelectorAll('script');
+
+      scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        if (script.src) {
+          newScript.src = script.src;
+        } else {
+          newScript.textContent = script.textContent;
+        }
+        document.body.appendChild(newScript);
+      });
     });
 }
+

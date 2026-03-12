@@ -22,11 +22,11 @@
   height: 45px;
   background-color: #f0f4f5;
   color: #111827;
-  padding: 15px;
+  padding-left: 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   border-bottom: 2px solid #cfcfcfc2;
+  position: relative;
 }
 
 /* Main content area */

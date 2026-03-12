@@ -16,10 +16,12 @@ body {
 }
 
 #info {
-  width: 9%;
+  width: 10%;
   gap: 5px;
   display: flex;
   align-items: center;
+  position: absolute;
+  right: 0;
 
   #calendar {
     height: 1.1em;
