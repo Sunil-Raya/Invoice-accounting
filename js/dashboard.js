@@ -11,14 +11,14 @@ function initDashboard() {
   window.myChart = new Chart(ctx, {
     type: "doughnut",
     data: {
-      labels: ["Red", "Blue", "Yellow"],
+      labels: ["Total", "Received", "Pending"],
       datasets: [{
-        label: "My First Dataset",
+        label: "Total Money",
         data: [300, 50, 100],
         backgroundColor: [
-          "rgb(255, 99, 132)",
           "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)"
+          "rgb(120, 255, 86)",
+          "rgb(199, 0, 43)"
         ],
         hoverOffset: 4
       }]

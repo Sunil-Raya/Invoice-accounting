@@ -1,9 +1,13 @@
 .chart-cont {
-  width: 400px;
-  height: 400px;
+  width: fit-content;
+  height: fit-content;
 }
 
 canvas {
-  width: 400px;
-  height: 400px;
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+#mychart {
 }
