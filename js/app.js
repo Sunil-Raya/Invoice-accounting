@@ -71,6 +71,9 @@ function activateSidebar() {
             if (page === "dashboard.html" && typeof initDashboard === 'function') {
               initDashboard();
             }
+            if (page === "companies.html" && typeof initCompanies === 'function') {
+              initCompanies();
+            }
           }, 50);
         });
     });
@@ -103,6 +106,9 @@ function activateSidebar() {
         // Call init functions for specific pages
         if (defaultPage === "dashboard.html" && typeof initDashboard === 'function') {
           initDashboard();
+        }
+        if (defaultPage === "companies.html" && typeof initCompanies === 'function') {
+          initCompanies();
         }
       }, 50);
     });

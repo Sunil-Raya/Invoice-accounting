@@ -3,9 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Companies</title>
 </head>
 <body>
-    Companies
+    <div class="companies-container">
+        <!-- Search Section -->
+        <div class="search-section">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-field" 
+                placeholder="Search companies..."
+            >
+        </div>
+
+        <!-- Companies Grid -->
+        <div class="companies-grid" id="companiesGrid">
+            <!-- Company cards will be populated here -->
+            <!-- Skeleton loaders for initial state -->
+            <div class="company-card skeleton"></div>
+            <div class="company-card skeleton"></div>
+            <div class="company-card skeleton"></div>
+        </div>
+
+        <!-- Add Company Button (always at the end) -->
+        <div class="company-card add-company-card" id="addCompanyCard">
+            <div class="add-company-content">
+                <div class="plus-icon">+</div>
+                <p>Add New Company</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Company Modal -->
+    <div class="modal" id="addCompanyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Company</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="addCompanyForm" class="company-form">
+                <div class="form-group">
+                    <label for="companyName">Company Name *</label>
+                    <input type="text" id="companyName" name="companyName" required>
+                </div>
+                <div class="form-group">
+                    <label for="companyEmail">Email</label>
+                    <input type="email" id="companyEmail" name="companyEmail">
+                </div>
+                <div class="form-group">
+                    <label for="companyPhone">Phone</label>
+                    <input type="tel" id="companyPhone" name="companyPhone">
+                </div>
+                <div class="form-group">
+                    <label for="companyAddress">Address</label>
+                    <textarea id="companyAddress" name="companyAddress" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-submit">Add Company</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>
