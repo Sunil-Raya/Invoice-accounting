@@ -3,9 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Reports and Statements">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/chart.css">
+    <title>Reports</title>
 </head>
 <body>
-    statement
+    <h1 style="margin-bottom: 32px;">Reports & Statements</h1>
+    
+    <div style="display: flex; gap: 24px; margin-bottom: 32px;">
+        <div style="flex: 1;">
+            <label for="reportType" style="display: block; font-weight: 600; margin-bottom: 8px; color: #1f2937;">Report Type</label>
+            <select id="reportType" style="width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.9375rem;">
+                <option value="sales">Sales Summary</option>
+                <option value="payments">Payment Summary</option>
+                <option value="company">Company Report</option>
+            </select>
+        </div>
+        <div style="flex: 1;">
+            <label for="reportPeriod" style="display: block; font-weight: 600; margin-bottom: 8px; color: #1f2937;">Period</label>
+            <select id="reportPeriod" style="width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.9375rem;">
+                <option value="monthly">This Month</option>
+                <option value="quarterly">This Quarter</option>
+                <option value="yearly">This Year</option>
+                <option value="all">All Time</option>
+            </select>
+        </div>
+        <div style="display: flex; align-items: flex-end;">
+            <button class="btn btn-primary" id="generateReport">Generate Report</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="reportTable">
+            <thead>
+                <tr id="reportHeaders">
+                    <th>Date</th>
+                    <th>Company</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="reportBody">
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 40px; color: #9ca3af;">
+                        Select report type and click Generate Report
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/statement.js"></script>
 </body>
 </html>

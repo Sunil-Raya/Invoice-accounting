@@ -3,9 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Add Sale">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/form.css">
+    <title>Add Sale</title>
 </head>
 <body>
-    sales
+    <h1 style="margin-bottom: 32px;">Add New Sale</h1>
+    
+    <div class="form-container">
+        <form id="saleForm">
+            <div class="form-group">
+                <label for="saleCompany">Company *</label>
+                <select id="saleCompany" name="company" required>
+                    <option value="">Select a company</option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <div class="form-group">
+                    <label for="saleAmount">Amount *</label>
+                    <input type="number" id="saleAmount" name="amount" placeholder="0.00" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="saleDate">Date *</label>
+                    <input type="date" id="saleDate" name="date" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="saleDescription">Description</label>
+                <textarea id="saleDescription" name="description" placeholder="Enter sale description..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="saleReference">Reference Number</label>
+                <input type="text" id="saleReference" name="reference" placeholder="Enter reference number">
+            </div>
+
+            <div class="form-actions">
+                <button type="reset" class="btn btn-secondary">Clear</button>
+                <button type="submit" class="btn btn-primary">Add Sale</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/sales.js"></script>
 </body>
 </html>

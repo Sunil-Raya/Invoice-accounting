@@ -2,34 +2,110 @@
   padding: 0;
   box-sizing: border-box;
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif;
 }
 
 body {
   height: 100vh;
   width: 100vw;
+  color: #1f2937;
+  background-color: #ffffff;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f3f4f6;
 }
 
-#identity{
-    font-size: 1.5rem;
-    font-weight: 550;
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+#identity {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: -0.5px;
 }
 
 #info {
-  width: 10%;
-  gap: 5px;
+  gap: 12px;
   display: flex;
   align-items: center;
   position: absolute;
   right: 0;
+  margin-right: 24px;
+}
 
-  #calendar {
-    height: 1.1em;
-    width: 1.1em;
-  }
+#calendar {
+  height: 20px;
+  width: 20px;
+  opacity: 0.6;
+  flex-shrink: 0;
+  stroke: #1f2937;
+}
 
-  #Date {
-    font-size: .9rem;
-    font-weight: 550;
-  }
+#Date {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #1f2937;
+  letter-spacing: -0.3px;
+}
+
+h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.5;
+  color: #6b7280;
+}
+
+/* Link Styles */
+a {
+  color: #0ea5e9;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #0284c7;
+}
+
+/* Focus Visible */
+*:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
 }

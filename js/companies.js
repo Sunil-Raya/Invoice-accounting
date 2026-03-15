@@ -35,28 +35,28 @@ let filteredCompanies = [...mockCompanies];
 function initCompanies() {
     const companiesGrid = document.getElementById("companiesGrid");
     const searchInput = document.getElementById("searchInput");
-    const addCompanyCard = document.getElementById("addCompanyCard");
     const addCompanyModal = document.getElementById("addCompanyModal");
     const addCompanyForm = document.getElementById("addCompanyForm");
     const closeModal = document.getElementById("closeModal");
     const cancelBtn = document.getElementById("cancelBtn");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+
+    if (!companiesGrid || !searchInput) return;
 
     searchInput.addEventListener("input", (e) => handleSearch(e, companiesGrid));
-    addCompanyCard.addEventListener("click", () => openModal(addCompanyModal));
-    closeModal.addEventListener("click", () => closeCompanyModal(addCompanyModal, addCompanyForm));
-    cancelBtn.addEventListener("click", () => closeCompanyModal(addCompanyModal, addCompanyForm));
-    addCompanyForm.addEventListener("submit", (e) => handleAddCompany(e, addCompanyModal, addCompanyForm, companiesGrid));
+    
+    closeModal.addEventListener("click", () => closeCompanyModal(addCompanyModal, modalBackdrop, addCompanyForm));
+    cancelBtn.addEventListener("click", () => closeCompanyModal(addCompanyModal, modalBackdrop, addCompanyForm));
+    addCompanyForm.addEventListener("submit", (e) => handleAddCompany(e, addCompanyModal, modalBackdrop, addCompanyForm, companiesGrid));
 
-    addCompanyModal.addEventListener("click", (e) => {
-        if (e.target === addCompanyModal) closeCompanyModal(addCompanyModal, addCompanyForm);
-    });
+    modalBackdrop.addEventListener("click", () => closeCompanyModal(addCompanyModal, modalBackdrop, addCompanyForm));
 
-    initializePage(companiesGrid);
+    initializePage(companiesGrid, addCompanyModal, modalBackdrop);
 }
 
-function initializePage(companiesGrid) {
+function initializePage(companiesGrid, addCompanyModal, modalBackdrop) {
     showSkeletons(companiesGrid);
-    setTimeout(() => loadCompanies(companiesGrid), 300);
+    setTimeout(() => loadCompanies(companiesGrid, addCompanyModal, modalBackdrop), 300);
 }
 
 function showSkeletons(companiesGrid) {
@@ -67,17 +67,23 @@ function showSkeletons(companiesGrid) {
     `;
 }
 
-function loadCompanies(companiesGrid) {
-    filteredCompanies.length === 0 ? showEmptyState(companiesGrid) : renderCompanies(filteredCompanies, companiesGrid);
+function loadCompanies(companiesGrid, addCompanyModal, modalBackdrop) {
+    filteredCompanies.length === 0 ? showEmptyState(companiesGrid) : renderCompanies(filteredCompanies, companiesGrid, addCompanyModal, modalBackdrop);
 }
 
-function renderCompanies(companies, companiesGrid) {
+function renderCompanies(companies, companiesGrid, addCompanyModal, modalBackdrop) {
     companiesGrid.innerHTML = "";
+    
     if (companies.length === 0) {
         showEmptyState(companiesGrid);
         return;
     }
+    
     companies.forEach((company) => companiesGrid.appendChild(createCompanyCard(company)));
+    
+    // Add "Add Company" card at the end
+    const addCard = createAddCompanyCard(addCompanyModal, modalBackdrop);
+    companiesGrid.appendChild(addCard);
 }
 
 function createCompanyCard(company) {
@@ -109,11 +115,20 @@ function createCompanyCard(company) {
     return card;
 }
 
-function showEmptyState(companiesGrid) {
-    companiesGrid.innerHTML = `
-        <div class="company-card skeleton" style="opacity: 0.5;"></div>
+function createAddCompanyCard(addCompanyModal, modalBackdrop) {
+    const card = document.createElement("div");
+    card.className = "company-card add-company-card";
+    card.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; width: 100%;">
+            <div style="font-size: 2.5rem; font-weight: 300; color: #0ea5e9; line-height: 1;">+</div>
+            <p style="margin: 0; color: #0ea5e9; font-size: 1rem; font-weight: 600;">Add New Company</p>
+        </div>
     `;
+    card.addEventListener("click", () => openModal(addCompanyModal, modalBackdrop));
+    return card;
+}
 
+function showEmptyState(companiesGrid) {
     const emptyMessage = document.createElement("div");
     emptyMessage.style.cssText = `
         grid-column: 1 / -1;
@@ -123,7 +138,7 @@ function showEmptyState(companiesGrid) {
     `;
     emptyMessage.innerHTML = `
         <p style="font-size: 1.1rem; margin: 1rem 0;">No companies found</p>
-        <p style="font-size: 0.95rem; color: #9ca3af;">Click the "Add New Company" button to create one</p>
+        <p style="font-size: 0.95rem; color: #9ca3af;">Click the "Add New Company" card to create one</p>
     `;
     companiesGrid.appendChild(emptyMessage);
 }
@@ -137,21 +152,26 @@ function handleSearch(e, companiesGrid) {
             company.email?.toLowerCase().includes(searchTerm) ||
             company.phone?.includes(searchTerm)
         );
-    loadCompanies(companiesGrid);
+    
+    const addCompanyModal = document.getElementById("addCompanyModal");
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    loadCompanies(companiesGrid, addCompanyModal, modalBackdrop);
 }
 
-function openModal(addCompanyModal) {
+function openModal(addCompanyModal, modalBackdrop) {
     addCompanyModal.classList.add("active");
+    modalBackdrop.classList.add("active");
     document.body.style.overflow = "hidden";
 }
 
-function closeCompanyModal(addCompanyModal, addCompanyForm) {
+function closeCompanyModal(addCompanyModal, modalBackdrop, addCompanyForm) {
     addCompanyModal.classList.remove("active");
+    modalBackdrop.classList.remove("active");
     document.body.style.overflow = "auto";
     addCompanyForm.reset();
 }
 
-function handleAddCompany(e, addCompanyModal, addCompanyForm, companiesGrid) {
+function handleAddCompany(e, addCompanyModal, modalBackdrop, addCompanyForm, companiesGrid) {
     e.preventDefault();
 
     const formData = new FormData(addCompanyForm);
@@ -168,7 +188,7 @@ function handleAddCompany(e, addCompanyModal, addCompanyForm, companiesGrid) {
     console.log("New company to add:", newCompany);
     allCompanies.unshift(newCompany);
     filteredCompanies = [...allCompanies];
-    closeCompanyModal(addCompanyModal, addCompanyForm);
-    loadCompanies(companiesGrid);
+    closeCompanyModal(addCompanyModal, modalBackdrop, addCompanyForm);
+    loadCompanies(companiesGrid, addCompanyModal, modalBackdrop);
     alert("Company added successfully!");
 }
