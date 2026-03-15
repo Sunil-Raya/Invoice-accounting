@@ -39,7 +39,8 @@
 #main {
   flex: 1;
   background-color: #ffffff;
-  padding: 32px;
+  padding: 10px;
+  margin: 0;
   overflow-y: auto;
   min-height: 0;
 }
