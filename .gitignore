@@ -1,0 +1,5 @@
+# Ignore API keys file
+api.js
+
+# Node modules
+node_modules/
